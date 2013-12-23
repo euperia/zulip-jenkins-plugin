@@ -40,9 +40,9 @@ public class Humbug {
 
     protected String getHost() {
         if (this.subdomain.length() > 0) {
-            return this.subdomain + ".humbughq.com";
+            return this.subdomain + ".zulip.com/api";
         }
-        return "humbughq.com";
+        return "api.zulip.com";
     }
 
     public String getSubdomain() {
@@ -58,7 +58,7 @@ public class Humbug {
     }
 
     public String post(String url, NameValuePair[] parameters) {
-        PostMethod post = new PostMethod("https://" + getHost() + "/api/v1/" + url);
+        PostMethod post = new PostMethod("https://" + getHost() + "/v1/" + url);
         post.setRequestHeader("Content-Type", post.FORM_URL_ENCODED_CONTENT_TYPE);
         try {
             post.setRequestBody(parameters);
@@ -110,6 +110,6 @@ public class Humbug {
                                 new NameValuePair("to",      stream),
                                 new NameValuePair("subject", subject),
                                 new NameValuePair("content", message)};
-        return post("send_message", body);
+        return post("messages", body);
     }
 }
