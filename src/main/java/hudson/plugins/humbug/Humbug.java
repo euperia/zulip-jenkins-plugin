@@ -60,6 +60,9 @@ public class Humbug {
     public String post(String url, NameValuePair[] parameters) {
         PostMethod post = new PostMethod("https://" + getHost() + "/v1/" + url);
         post.setRequestHeader("Content-Type", post.FORM_URL_ENCODED_CONTENT_TYPE);
+        String encoding = Base64Encoder.encode(getApiKey() + ":" + getEmail());
+        post.setHeader("Authorization", "Basic " + encoding);
+
         try {
             post.setRequestBody(parameters);
             HttpClient client = getClient();
