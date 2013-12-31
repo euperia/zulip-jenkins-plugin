@@ -61,7 +61,7 @@ public class Humbug {
         PostMethod post = new PostMethod("https://" + getHost() + "/v1/" + url);
         post.setRequestHeader("Content-Type", post.FORM_URL_ENCODED_CONTENT_TYPE);
         String encoding = Base64Encoder.encode(getApiKey() + ":" + getEmail());
-        post.setHeader("Authorization", "Basic " + encoding);
+        post.setRequestHeader("Authorization", "Basic " + encoding);
 
         try {
             post.setRequestBody(parameters);
@@ -83,28 +83,6 @@ public class Humbug {
             post.releaseConnection();
         }
     }
-
-//    public String get(String url) {
-//        GetMethod get = new GetMethod("https://" + getHost() + "/api/v1/" + url);
-//        get.setFollowRedirects(true);
-//        get.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-//        try {
-//            getClient().executeMethod(get);
-//            verify(get.getStatusCode());
-//            return get.getResponseBodyAsString();
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        } finally {
-//            get.releaseConnection();
-//        }
-//    }
-//
-//    public boolean verify(int returnCode) {
-//        if (returnCode != 200) {
-//            throw new RuntimeException("Unexpected response code: " + Integer.toString(returnCode));
-//        }
-//        return true;
-//    }
 
     public String sendStreamMessage(String stream, String subject, String message) {
         NameValuePair[] body = {new NameValuePair("api-key", this.getApiKey()),
