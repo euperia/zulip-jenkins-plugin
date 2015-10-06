@@ -17,13 +17,15 @@ public class Humbug {
     private String email;
     private String apiKey;
     private String subdomain;
+    private String server;
     private static final Logger LOGGER = Logger.getLogger(Humbug.class.getName());
 
-    public Humbug(String email, String apiKey, String subdomain) {
+    public Humbug(String email, String apiKey, String subdomain, String server) {
         super();
         this.email = email;
         this.apiKey = apiKey;
         this.subdomain = subdomain;
+        this.server = server;
     }
 
     protected HttpClient getClient() {
@@ -40,6 +42,11 @@ public class Humbug {
     }
 
     protected String getHost() {
+
+        if (this.server.length() > 0) {
+            return this.server;
+        }
+
         if (this.subdomain.length() > 0) {
             return this.subdomain + ".zulip.com/api";
         }
@@ -48,6 +55,10 @@ public class Humbug {
 
     public String getSubdomain() {
       return this.subdomain;
+    }
+
+    public String getServer() {
+        return this.server;
     }
 
     public String getApiKey() {

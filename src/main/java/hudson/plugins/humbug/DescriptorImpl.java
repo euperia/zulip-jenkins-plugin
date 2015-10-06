@@ -16,6 +16,7 @@ public class DescriptorImpl extends BuildStepDescriptor<Publisher> {
     private String apiKey;
     private String stream;
     private String hudsonUrl;
+    private String server;
     private boolean smartNotify;
     private static final Logger LOGGER = Logger.getLogger(DescriptorImpl.class.getName());
 
@@ -50,6 +51,10 @@ public class DescriptorImpl extends BuildStepDescriptor<Publisher> {
 
     public boolean getSmartNotify() {
         return smartNotify;
+    }
+
+    public String getServer() {
+        return server;
     }
 
     public boolean isApplicable(Class<? extends AbstractProject> aClass) {
